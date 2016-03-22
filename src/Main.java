@@ -117,12 +117,17 @@ public class Main {
                     default:
                         break;
                 }
-                if (i == 4 || (playersvalue > dealersvalue && playersvalue <= 21))   // sets the winning conditions
+                if (i == 4 || (playersvalue > dealersvalue && playersvalue <= 21)) {   // sets the winning conditions
                     System.out.println("Congratulations, You Win!");
+                    break;
+                }
+            }
+            if (playersvalue > dealersvalue) {
+                System.out.println("Congratulations, You Win!");
             }
         }
         else
-            System.out.println("GAME OVER");
+            System.out.println("Over");
 
     }
 }
