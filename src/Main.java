@@ -92,38 +92,43 @@ public class Main {
         * During this time it takes all the hits and stores it into the arraylist cards4table and prints them out*/
         if(lose = true) {
             for (int i = 0; i < 4; i++) {
-                System.out.println("Do you want to Hit or Stay? (type \"hit\" or \"stay\") ");
-                String playersplay = scan.nextLine();
-                switch (playersplay) {
-                    case "hit":
-                        String playern = Draw.draw();
-                        cards4table.add(playern);
-                        if (playern == "ace") {        // if there is an ace it will ask the player 1 or 11?
-                            cardvalue = Aces.aces();
-                        } else {
-                           cardvalue = Draw.values(playern);}
-                        playersvalue += cardvalue;
-                        System.out.println("_________________________________________________");
-                        System.out.print("Dealer: ");
-                        for (int j = 0; j < cards4tableD.size(); j++) {                   //prints dealers cards on the table
-                            System.out.print(cards4tableD.get(j) + "  ");
-                        }
-                        System.out.print("\nYou: ");
-                        for (int j = 0; j < cards4table.size();j++) {                     //prints the player's cards on the table
-                            System.out.print(cards4table.get(j) + "  ");
-                        }
-                        System.out.println("\n_________________________________________________");
+                if (playersvalue > 21) {
+                    lose = false;
+                } else {
+                    System.out.println("Do you want to Hit or Stay? (type \"hit\" or \"stay\") ");
+                    String playersplay = scan.nextLine();
+                    switch (playersplay) {
+                        case "hit":
+                            String playern = Draw.draw();
+                            cards4table.add(playern);
+                            if (playern == "ace") {        // if there is an ace it will ask the player 1 or 11?
+                                cardvalue = Aces.aces();
+                            } else {
+                                cardvalue = Draw.values(playern);
+                            }
+                            playersvalue += cardvalue;
+                            System.out.println("_________________________________________________");
+                            System.out.print("Dealer: ");
+                            for (int j = 0; j < cards4tableD.size(); j++) {                   //prints dealers cards on the table
+                                System.out.print(cards4tableD.get(j) + "  ");
+                            }
+                            System.out.print("\nYou: ");
+                            for (int j = 0; j < cards4table.size(); j++) {                     //prints the player's cards on the table
+                                System.out.print(cards4table.get(j) + "  ");
+                            }
+                            System.out.println("\n_________________________________________________");
+                            break;
+                        default:
+                            break;
+                    }
+                    if (i == 4 || (playersvalue > dealersvalue && playersvalue <= 21)) {   // sets the winning conditions
+                        System.out.println("Congratulations, You Win!");
                         break;
-                    default:
-                        break;
+                    }
                 }
-                if (i == 4 || (playersvalue > dealersvalue && playersvalue <= 21)) {   // sets the winning conditions
+                if (playersvalue > dealersvalue) {
                     System.out.println("Congratulations, You Win!");
-                    break;
                 }
-            }
-            if (playersvalue > dealersvalue) {
-                System.out.println("Congratulations, You Win!");
             }
         }
         else
